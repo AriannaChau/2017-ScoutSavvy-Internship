@@ -1,0 +1,20 @@
+{
+  "name": "2017 ScoutSavvy Internship",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Daniel Lopez, Karina Roush, Arianna Chau, Maria Del Castillo"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
