@@ -1,9 +1,14 @@
 html
   head
     title 
-    script(src="https://d3js.org/d3.v4.min.js")
+    script(src="http://d3js.org/d3.v3.min.js")
     script(src="/js/jquery-3.2.1.min.js")
     script(src="build/js/app.js")
     link(rel="stylesheet" type="text/css" href="build/css/styles.css")
   body
     h1 Coming Soon...
+    form
+      input.stateInput
+      button(type="submit") append iframe
+    button(type="button").chart append chart
+    #target
