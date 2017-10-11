@@ -1,14 +1,52 @@
 html
   head
     title 
+    script(src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js")
     script(src="http://d3js.org/d3.v3.min.js")
     script(src="/js/jquery-3.2.1.min.js")
     script(src="build/js/app.js")
     link(rel="stylesheet" type="text/css" href="build/css/styles.css")
   body
-    h1 Coming Soon...
-    form
+    button(type="button").show-new-account MAKE USER
+    button(type="button").show-signin SIGN IN
+    button(type="button")#signout SIGN OUT
+    form#make-account
+      p What is your email address?
+      input.new-email
+      <br>
+      p Enter a password:
+      input.new-password(type="password")
+      <br>
+      button(type="submit")#make-account-submit Submit
+    form#signin
+      p What is your email address?
+      input.signin-email
+      <br>
+      p Enter a password:
+      input.signin-password(type="password")
+      <br>
+      button(type="submit")#signin-submit Submit
+    form#chart-form
       input.stateInput
       button(type="submit") append iframe
     button(type="button").chart append chart
+    button(type="button").chart-two append chart
     #target
+    <br>
+    form#survey
+      label(for="displayName")
+        p What is your displayName?
+      input#display-name
+      label(for="gender")
+        p What is your gender?
+      input#gender
+      <br>
+      label(for="age")
+        p What is your age?
+      input#age
+      <br>
+      label(for="race")
+        p What is your nationality?
+      input#race
+      <br>
+      button(type="submit")#survey-submit Submit
