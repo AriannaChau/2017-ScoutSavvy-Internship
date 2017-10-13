@@ -1,0 +1,17 @@
+.graph-selections {
+  display: flex;
+  width: 500px;
+  justify-content: space-around;
+  .graph-selection {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    background-color: rebeccapurple;
+    transition: background-color .4s;
+    color: white;
+    cursor: pointer;
+    &:hover {
+      background-color: purple;
+    }
+  }
+}
