@@ -7,46 +7,13 @@ html
     script(src="build/js/app.js")
     link(rel="stylesheet" type="text/css" href="build/css/styles.css")
   body
-    button(type="button").show-new-account MAKE USER
-    button(type="button").show-signin SIGN IN
-    button(type="button")#signout SIGN OUT
-    form#make-account
-      p What is your email address?
-      input.new-email
-      <br>
-      p Enter a password:
-      input.new-password(type="password")
-      <br>
-      button(type="submit")#make-account-submit Submit
-    form#signin
-      p What is your email address?
-      input.signin-email
-      <br>
-      p Enter a password:
-      input.signin-password(type="password")
-      <br>
-      button(type="submit")#signin-submit Submit
-    form#chart-form
-      input.stateInput
-      button(type="submit") append iframe
-    button(type="button").chart append chart
-    button(type="button").chart-two append chart
-    #target
-    <br>
-    form#survey
-      label(for="displayName")
-        p What is your displayName?
-      input#display-name
-      label(for="gender")
-        p What is your gender?
-      input#gender
-      <br>
-      label(for="age")
-        p What is your age?
-      input#age
-      <br>
-      label(for="race")
-        p What is your nationality?
-      input#race
-      <br>
-      button(type="submit")#survey-submit Submit
+    //- occupations form group
+    p Select which occupations you are interested in:
+      each val, index in [{'title': 'Computer support specialists', 'code': '151150'}, {'title': 'Computer programmers', 'code': '151131'}, {'title': 'Computer systems analysts', 'code': '151121'}, {'title': 'Database administrators', 'code': '151141'}, {'title': 'Computer hardware engineers', 'code': '172061'}, {'title': 'Computer network architects', 'code': '151143'}, {'title': 'Computer & information research scientists', 'code': '151111'}, {'title': 'Software developers, applications & systems software', 'code': '15113X'}, {'title': 'Computer control programmers and operators', 'code': '514010'} ]
+        .checkbox-inline
+          input.occupation(type='checkbox', name=val.title, value=val.code)
+          label(for=val.title)=val.title
+    .graph-selections
+      .graph-selection#age  AGE
+      .graph-selection#gender  GENDER
+      .graph-selection#ethnicity  ETHNICITY
