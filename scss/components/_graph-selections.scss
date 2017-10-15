@@ -1,17 +1,23 @@
 .graph-selections {
+  margin:  38px auto 0 auto;
   display: flex;
-  width: 500px;
-  justify-content: space-around;
+  width: 80vw;
+  justify-content: space-between;
   .graph-selection {
-    width: 100px;
-    height: 100px;
-    padding: 10px;
-    background-color: rebeccapurple;
-    transition: background-color .4s;
-    color: white;
-    cursor: pointer;
-    &:hover {
-      background-color: purple;
+    width: 306px;
+    text-align: center;
+    h4 {
+      margin-top: 36px;
+    }
+    .placeholder {
+      border-radius: 50%;
+      height: 306px;
+      border: 2px solid $color-links;
+      transition: background-color .4s;
+      cursor: pointer;
+      &:hover {
+        background-color: $color-accent2;
+      }
     }
   }
 }

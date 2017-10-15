@@ -1,0 +1,60 @@
+.checkboxes {
+  margin-top: -27px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+  position: absolute;
+  &:checked ~ .box-control {
+    background-color: $color-dark;
+    &::before {
+      background-image: url('../../assets/images/check.png');
+      transition: width .3s;
+      width: 52px;
+    }
+  }
+  ~ .box-control {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      bottom: -2px;
+      width: 0;
+      height: 48px;
+    }
+  }
+}
+
+.checkbox-inline {
+  width: 30%;
+  margin-top: 51px;
+  font-family: 'open sans thin';
+  position: relative;
+  .box-control {
+    width: 27px;
+    height: 27px;
+    border-radius: 0;
+    background-color: white;
+    box-shadow: 0 1px 3px fade-out(black, .5);
+    cursor: pointer;
+    &:hover{
+      background-color: $color-dark;
+    }
+  }
+  label {
+    position: absolute;
+    top: 2px;
+    left: 40px; //box width + wanted margin
+    cursor: pointer;
+    &:hover {
+      color: $color-links;
+      + .box-control{
+        background-color: $color-dark;
+      }
+    }
+  }
+}

@@ -24,14 +24,29 @@ html
       .form-control
         h5 First, enter your city
         input#city(type="text" placeholder="Portland, OR")
-      h5 Next choose which jobs you are interested in
+      .form-control
+        h5 Next choose which jobs you are interested in
       //- occupations form group
-      each val, index in [{'title': 'Computer support specialists', 'code': '151150'}, {'title': 'Computer programmers', 'code': '151131'}, {'title': 'Computer systems analysts', 'code': '151121'}, {'title': 'Database administrators', 'code': '151141'}, {'title': 'Computer hardware engineers', 'code': '172061'}, {'title': 'Computer network architects', 'code': '151143'}, {'title': 'Computer & information research scientists', 'code': '151111'}, {'title': 'Software developers, applications & systems software', 'code': '15113X'}, {'title': 'Computer control programmers and operators', 'code': '514010'} ]
-        .checkbox-inline
-          input.occupation(type='checkbox', name=val.title, value=val.code)
-          label(for=val.title)=val.title
-      h5 Now, what group are you interested in
-      .graph-selections
-        .graph-selection#age  AGE
-        .graph-selection#gender  GENDER
-        .graph-selection#ethnicity  ETHNICITY
+      .checkboxes
+        each val, index in [{'title': 'Computer support specialists', 'code': '151150'}, {'title': 'Computer programmers', 'code': '151131'}, {'title': 'Computer systems analysts', 'code': '151121'}, {'title': 'Database administrators', 'code': '151141'}, {'title': 'Computer hardware engineers', 'code': '172061'}, {'title': 'Computer network architects', 'code': '151143'}, {'title': 'Computer & information research scientists', 'code': '151111'}, {'title': 'Software developers, applications & systems software', 'code': '15113X'}, {'title': 'Computer control programmers and operators', 'code': '514010'} ]
+          .checkbox-inline
+            input.occupation(type='checkbox', name=val.title, value=val.code id=val.code)
+            label(for=val.code)=val.title
+            .box-control
+      .form-control
+        h5 Now, what group are you interested in
+    .graph-selections
+      .graph-selection
+        .placeholder#age  
+        h4 AGE
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      .graph-selection
+        .placeholder#gender
+        h4 GENDER
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      .graph-selection
+        .placeholder#ethnicity
+        h4 ETHNICITY
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    button.go Go!
+    footer © Copyright 2017 Karina Roush, Daniel Lopez, Maria Del Castillo Infantas, Arianna Chau

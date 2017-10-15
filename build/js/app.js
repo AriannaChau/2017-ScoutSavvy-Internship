@@ -135,6 +135,20 @@ var data = require('./../js/datausa.js');
 
 $(function() {
   let selectedOccupations;
+  var selectedChart;
+
+  //check checkboxes when box is clicked
+  $('.box-control').click(function() {
+    if ($(this).siblings('input').is(':checked')) {
+      $(this).siblings('input').prop('checked', false);
+    } else {
+      $(this).siblings('input').prop('checked', true);
+    }
+    selectedOccupations = $('input:checkbox:checked.occupation').map(function () {
+      return this.value;
+    }).get();
+    console.log(selectedOccupations);
+  });
 
   //get selected occupations on change
   $('.occupation').change(function() {
@@ -145,28 +159,35 @@ $(function() {
   });
 
   $('#age').click(function() {
-    if (selectedOccupations === undefined) {
-      alert('please select at least one occupation');
-    } else {
-        data.ageChart(selectedOccupations);
-    }
+    selectedChart = "age";
+    $(this).parent().siblings().css('color', 'white');
+    $(this).parent().css('color', '#EADA3D');
   });
 
   $('#gender').click(function() {
-    if (selectedOccupations === undefined) {
-      alert('please select at least one occupation');
-    } else {
-        data.genderChartWorkforce(selectedOccupations);
-        data.genderChartSalary(selectedOccupations);
-    }
+    selectedChart = "gender";
+    $(this).parent().siblings().css('color', 'white');
+    $(this).parent().css('color', '#EADA3D');
   });
 
   $('#ethnicity').click(function() {
+    selectedChart = "ethnicity";
+    $(this).parent().siblings().css('color', 'white');
+    $(this).parent().css('color', '#EADA3D');
+  });
+
+  $('.go').click(function() {
     if (selectedOccupations === undefined) {
-      alert('please select at least one occupation');
-    } else {
-        // data.obesity();
-        // data.ethnicityChart(selectedOccupations);
+      alert('Please select at least one occupation.');
+    } else if (selectedChart === undefined){
+      alert('Please select Age, Gender, or Ethnicity.');
+    } else if (selectedChart === "age"){
+      data.ageChart(selectedOccupations);
+    } else if (selectedChart === "gender"){
+      data.genderChartWorkforce(selectedOccupations);
+      data.genderChartSalary(selectedOccupations);
+    } else if (selectedChart === "ethnicity"){
+      data.ethnicityChart(selectedOccupations);
     }
   });
 });

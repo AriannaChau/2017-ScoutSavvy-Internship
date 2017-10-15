@@ -7,3 +7,14 @@ a, a:hover, a:active, a:default {
   text-decoration: none;
   color: $color-links;
 }
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+button, input {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}

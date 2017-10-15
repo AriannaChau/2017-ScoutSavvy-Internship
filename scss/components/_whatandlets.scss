@@ -3,9 +3,27 @@
   p {
     margin-bottom: 60px;
   }
-}
-
-.form-control {
-  margin-top: 36px;
-  text-align: center;
+  h5 {
+    margin-top: 60px;
+  }
+  h5:first-of-type {
+    margin-top: 36px;
+  }
+  .form-control {
+    width: 674px;
+    margin: 0 auto;
+  }
+  input[type=text] {
+    border-radius: 100px;
+    width: 674px;
+    height: 38px;
+    margin-top: 5px;
+    padding-top: 3px;
+    padding-left: 22px;
+    font-size: 20px;
+    font-family: $font-secondary;
+    &::placeholder {
+      color: fade-out($color-bg, .4);
+    }
+  }
 }

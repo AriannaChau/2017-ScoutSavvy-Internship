@@ -1,0 +1,20 @@
+button {
+  font-size: 28.8px;
+  color: $color-dark;
+  box-shadow: 0 2px 5px fade-out(black, .5);
+  background-color: $color-accent2;
+  border-radius: 120px;
+  width: 293px;
+  height: 72px;
+  &:hover {
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+    box-shadow: 10px 10px 20px fade-out(black, .7), inset 1px 1px 5px fade-out(white, .5);
+
+  }
+}
+
+.go {
+  margin: 73px auto;
+  display: block;
+}

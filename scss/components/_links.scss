@@ -1,0 +1,24 @@
+a {
+  position: relative;
+  overflow: hidden;
+  transition: all .4s ease-in-out;
+  &:after {
+    content: '';
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    left: -20%;
+    background-image: linear-gradient(135deg, rgba(255,255,255,0), $color-bg, rgba(255,255,255,0));
+    transition: all .4s ease-in-out;
+  }
+  &:hover {
+    color: $color-accent2;
+    cursor: pointer;
+    &:after {
+    left: 100%;
+    }
+  }
+}

@@ -3,28 +3,3 @@ body {
   color: $color-light;
   font-family: $font-primary;
 }
-
-a {
-  position: relative;
-  overflow: hidden;
-  &:after {
-    content: '';
-    width: 20%;
-    height: 100%;
-    position: absolute;
-    right: auto;
-    top: 0;
-    bottom: 0;
-    left: -20%;
-    background-image: linear-gradient(135deg, rgba(255,255,255,0), $color-bg, rgba(255,255,255,0));
-  }
-  &:hover {
-    transition: all .7s ease-out;
-    color: $color-accent2;
-    cursor: pointer;
-    &:after {
-    transition: all .4s ease-out;
-    left: 100%;
-    }
-  }
-}
