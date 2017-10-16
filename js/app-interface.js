@@ -1,8 +1,8 @@
-var data = require('./../js/datausa.js');
+var data = require('./../js/backend.js');
+
 
 $(function() {
-  let selectedOccupations;
-  var selectedChart;
+  let selectedOccupations, selectedChart, selectedCity;
 
   //check checkboxes when box is clicked
   $('.box-control').click(function() {
@@ -21,7 +21,6 @@ $(function() {
     selectedOccupations = $('input:checkbox:checked.occupation').map(function () {
       return this.value;
     }).get();
-    console.log(selectedOccupations);
   });
 
   $('#age').click(function() {
@@ -43,20 +42,41 @@ $(function() {
   });
 
   $('.go').click(function() {
-    if (selectedOccupations === undefined) {
+    selectedCity = $('#city').val();
+    if (selectedCity === '') {
+      alert('Please enter a city');
+    } else if (selectedOccupations === undefined) {
       alert('Please select at least one occupation.');
-    } else if (selectedChart === undefined){
+    } else if (selectedChart === undefined) {
       alert('Please select Age, Gender, or Ethnicity.');
     } else if (selectedChart === "age"){
       data.ageChart(selectedOccupations);
+      $('#selectedChart').text('age');
+      $('#chart-container').prepend('<h4>Average age of occupations</h4>');
+      showChart();
     } else if (selectedChart === "gender"){
       data.genderChartWorkforce(selectedOccupations);
       data.genderChartSalary(selectedOccupations);
+      showChart();
     } else if (selectedChart === "ethnicity"){
       // data.ethnicityChart(selectedOccupations);
       // data.newArrayWithTitleFromCodes(selectedOccupations);
+      // showChart();
     }
   });
+
+
+  function showChart() {
+    $('#city').val('');
+    $('#explore').fadeOut(2000);
+    setTimeout(function(){
+      $('#chart-section').fadeIn(2000);
+    }, 2500);
+    $('#selectedCity').text(selectedCity);
+    $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
+  }
+
+
 });
 
 

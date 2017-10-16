@@ -1,4 +1,18 @@
-#myChart {
-  width: 900px;
-  height: 900px;
+#chart-section {
+  display: none;
+  margin: 54px 76px;
+}
+
+.search-summary {
+  span {
+    color: $color-accent1;
+  }
+}
+
+#chart-container {
+  h4 {
+    font-size: 30px;
+    text-align: center;
+    margin: 30px 0;
+  }
 }

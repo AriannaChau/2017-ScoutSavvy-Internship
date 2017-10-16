@@ -2,7 +2,6 @@ html
   head
     title 
     script(src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js")
-    script(src="http://d3js.org/d3.v3.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js")
     script(src="/js/jquery-3.2.1.min.js")
     script(src="build/js/app.js")
@@ -53,6 +52,6 @@ html
           p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       button.go Go!
     section#chart-section
-      h3.search-summary You searched for information relating to <span id="selectedChart">gender</span> in <span id="occupations">computer science</span> in the city <span id="location">Portland, OR</span>. Here’s what we came up with:
-      canvas#myChart
+      h3.search-summary You searched for information relating to <span id="selectedChart">gender</span> in <span id="occupations">computer science</span> in the city <span id="selectedCity">Portland, OR</span>. Here’s what we came up with:
+      #chart-container
     footer © Copyright 2017 Karina Roush, Daniel Lopez, Maria Del Castillo Infantas, Arianna Chau
