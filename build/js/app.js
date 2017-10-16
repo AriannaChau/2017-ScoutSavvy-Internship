@@ -23,10 +23,60 @@ exports.ageChart = function(occupations) {
       avgFemale = Math.round(avgFemale * 100)/100;
       avgAge = (avgMale + avgFemale)/ 2;
       avgAge = Math.round(avgAge * 100)/100;
-      console.log(occupations[i], avgMale, avgFemale, avgAge);
-    });
-  }
-};
+      // console.log(occupations[i], avgMale, avgFemale, avgAge);
+      chartDataAge.push(avgAge);
+      chartDataMale.push(avgMale);
+      chartDataFemale.push(avgFemale);
+    });//end of api call
+  }//end of for loop
+
+  //chart.js specific
+  Chart.defaults.global.defaultFontColor = '#f1f1f1';
+  Chart.defaults.global.defaultFontFamily = 'open sans';
+
+  let chartLabels = this.newArrayWithTitleFromCodes(occupations);
+  let chartDataAge = [];
+  let chartDataMale = [];
+  let chartDataFemale = [];
+  let chartBgColors = getChartBgColor(occupations);
+  let chartBgColorsLight = getChartBgColorLight(occupations);
+  let chartBgColorsDark = getChartBgColorDark(occupations);
+
+  console.log(chartBgColors);
+  setTimeout(function() {
+    new Chart(document.getElementById("myChart"), {
+        type: 'bar',
+        data: {
+          labels: chartLabels,
+          datasets: [
+            {
+              label: "avg total age",
+              backgroundColor: chartBgColors,
+              data: chartDataAge
+            },
+            {
+              label: "avg male age",
+              backgroundColor: chartBgColorsLight,
+              data: chartDataMale
+            },
+            {
+              label: "avg female age",
+              backgroundColor: chartBgColorsDark,
+              data: chartDataFemale
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Average age of occupations',
+            fontSize: 30,
+            fontFamily: "comfortaa"
+          }
+        }
+    }); //end of new chart
+  }, 3000); //end of timeout and chart specific
+};//end of function
 
 exports.genderChartSalary = function(occupations) {
   for (let i = 0; i < occupations.length; i++) {
@@ -36,6 +86,39 @@ exports.genderChartSalary = function(occupations) {
       console.log(occupations[i], "MalesWage: ", avgMaleWage, " FemalesWage: ", avgFemaleWage);
     });
   }
+
+  //chart.js specific
+  Chart.defaults.global.defaultFontColor = '#f1f1f1';
+  Chart.defaults.global.defaultFontFamily = 'open sans';
+
+  let chartLabels = this.newArrayWithTitleFromCodes(occupations);
+  let chartData = [];
+  let chartBgColors = getChartBgColor(occupations);
+
+  // console.log(chartBgColors);
+  // setTimeout(function() {
+  //   new Chart(document.getElementById("myChart"), {
+  //       type: 'doughnut',
+  //       data: {
+  //         labels: chartLabels,
+  //         datasets: [
+  //           {
+  //             label: "age",
+  //             backgroundColor: chartBgColors,
+  //             data: chartData
+  //           }
+  //         ]
+  //       },
+  //       options: {
+  //         title: {
+  //           display: true,
+  //           text: 'Average age of occupations',
+  //           fontSize: 30,
+  //           fontFamily: "comfortaa"
+  //         }
+  //       }
+  //   }); //end of new chart
+  // }, 3000); //end of timeout and chart specific
 };
 
 exports.genderChartWorkforce = function(occupations) {
@@ -56,10 +139,18 @@ exports.ethnicityChart = function(occupations) {
   }
 };
 
-exports.obesity = function() {
-  d3.json("https://api.datausa.io/api/join?required=income,adult_obesity&show=geo", function(data) {
-    console.log(data);
-  });
+exports.newArrayWithTitleFromCodes = function(occupations) {
+  let listOfOccupations = [{title: 'Computer support specialists', code: '151150'}, {title: 'Computer programmers', code: '151131'}, {title: 'Computer systems analysts', code: '151121'}, {title: 'Database administrators', code: '151141'}, {title: 'Computer hardware engineers', code: '172061'}, {title: 'Computer network architects', code: '151143'}, {title: 'Computer & information research scientists', code: '151111'}, {title: 'Software developers, applications & systems software', code: '15113X'}, {title: 'Computer control programmers and operators', code: '514010'}];
+  let newArray = [];
+  for (let i = 0; i < occupations.length; i++) {
+    for (let j = 0; j < listOfOccupations.length; j++) {
+      if (occupations[i] === listOfOccupations[j].code) {
+        newArray.push(listOfOccupations[j].title);
+      }
+    }
+  }
+  console.log(newArray);
+  return newArray;
 };
 
 // function StateWageByGender(state) {
@@ -130,6 +221,37 @@ exports.obesity = function() {
 // }
 //
 
+function getChartBgColor(occupations) {
+    let output = [];
+    let colors = ['#FC784F', '#EADA3D', '#7EC2E3', '#C287E8', '#ABFAA9', '#4392F1', '#EF99AC', '#FFD166', '#7DCFB6'];
+    let counter = 0;
+    for (var i = 0; i < occupations.length; i++) {
+      output.push(colors[counter]);
+      counter++;
+    }
+    return output;
+}
+function getChartBgColorLight(occupations) {
+    let output = [];
+    let colors = ['#FC9C7F', '#EFE471', '#A1D2EA', '#D2A7EE', '#C1FBC0', '#76AFF4', '#F3B4C2', '#FFDD8F', '#A0DCC9'];
+    let counter = 0;
+    for (var i = 0; i < occupations.length; i++) {
+      output.push(colors[counter]);
+      counter++;
+    }
+    return output;
+}
+function getChartBgColorDark(occupations) {
+    let output = [];
+    let colors = ['#B8583A', '#AB9F2D', '#5C8EA6', '#8E63A9', '#7DB67B', '#316BB0', '#AE707E', '#BA994B', '#5B9785'];
+    let counter = 0;
+    for (var i = 0; i < occupations.length; i++) {
+      output.push(colors[counter]);
+      counter++;
+    }
+    return output;
+}
+
 },{}],2:[function(require,module,exports){
 var data = require('./../js/datausa.js');
 
@@ -147,7 +269,6 @@ $(function() {
     selectedOccupations = $('input:checkbox:checked.occupation').map(function () {
       return this.value;
     }).get();
-    console.log(selectedOccupations);
   });
 
   //get selected occupations on change
@@ -187,7 +308,8 @@ $(function() {
       data.genderChartWorkforce(selectedOccupations);
       data.genderChartSalary(selectedOccupations);
     } else if (selectedChart === "ethnicity"){
-      data.ethnicityChart(selectedOccupations);
+      // data.ethnicityChart(selectedOccupations);
+      // data.newArrayWithTitleFromCodes(selectedOccupations);
     }
   });
 });

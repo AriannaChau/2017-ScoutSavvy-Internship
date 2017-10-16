@@ -14,7 +14,6 @@ $(function() {
     selectedOccupations = $('input:checkbox:checked.occupation').map(function () {
       return this.value;
     }).get();
-    console.log(selectedOccupations);
   });
 
   //get selected occupations on change
@@ -54,7 +53,8 @@ $(function() {
       data.genderChartWorkforce(selectedOccupations);
       data.genderChartSalary(selectedOccupations);
     } else if (selectedChart === "ethnicity"){
-      data.ethnicityChart(selectedOccupations);
+      // data.ethnicityChart(selectedOccupations);
+      // data.newArrayWithTitleFromCodes(selectedOccupations);
     }
   });
 });
