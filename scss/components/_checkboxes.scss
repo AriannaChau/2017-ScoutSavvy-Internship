@@ -1,5 +1,5 @@
 .checkboxes {
-  margin-top: -27px;
+  margin: -27px 0 60px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -34,6 +34,12 @@ input[type=checkbox] {
   margin-top: 51px;
   font-family: 'open sans thin';
   position: relative;
+  @include respond-to('medium') {
+    width: calc(50% - 10px);
+  }
+  @include respond-to('medium') {
+    width: 100%;
+  }
   .box-control {
     width: 27px;
     height: 27px;

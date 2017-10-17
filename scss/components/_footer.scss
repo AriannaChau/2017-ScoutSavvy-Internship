@@ -9,4 +9,15 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+  @include respond-to('medium') {
+    font-size: 12px;
+  }
+  @include respond-to('small') {
+    font-size: 10px;
+  }
+  @include respond-to('small') {
+    font-size: 14px;
+    padding: 0 30px;
+    text-align: center;
+  }
 }

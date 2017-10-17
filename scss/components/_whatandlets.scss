@@ -1,5 +1,8 @@
 .what-and-lets {
   margin: 0 197px;
+  @include respond-to('large') {
+    margin: 0 50px;
+  }
   p {
     margin-bottom: 60px;
   }
@@ -12,6 +15,10 @@
   .form-control {
     width: 674px;
     margin: 0 auto;
+    @include respond-to('large') {
+      margin: 0;
+      width: auto;
+    }
   }
   input[type=text] {
     border-radius: 100px;
@@ -24,6 +31,13 @@
     font-family: $font-secondary;
     &::placeholder {
       color: fade-out($color-bg, .4);
+    }
+    @include respond-to('medium') {
+      width: 540px;
+      margin-top: 10px;
+    }
+    @include respond-to('small') {
+      width: 100%;
     }
   }
 }

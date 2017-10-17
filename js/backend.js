@@ -84,7 +84,8 @@ exports.genderChartSalary = function(occupations) {
     $.getJSON("https://api.datausa.io/api/?sort=desc&show=soc%2Csex&required=num_ppl%2Cnum_ppl_moe%2Cavg_wage_ft%2Cavg_wage_ft_moe&sumlevel=3%2Call&year=2015&geo=01000US&soc=" + occupations[i], function(data) {
       let avgMaleWage = data.data[0][6];
       let avgFemaleWage = data.data[1][6];
-      console.log(occupations[i], "MalesWage: ", avgMaleWage, " FemalesWage: ", avgFemaleWage);
+      chartDataFemale.push(avgFemaleWage);
+      chartDataMale.push(avgMaleWage);
     });
   }
 
@@ -93,45 +94,89 @@ exports.genderChartSalary = function(occupations) {
   Chart.defaults.global.defaultFontFamily = 'open sans';
 
   let chartLabels = this.newArrayWithTitleFromCodes(occupations);
-  let chartData = [];
-  let chartBgColors = getChartBgColor(occupations);
+  let chartDataMale = [];
+  let chartDataFemale = [];
+  let chartBgColorsLight = getChartBgColorLight(occupations);
+  let chartBgColorsDark = getChartBgColorDark(occupations);
 
-  // console.log(chartBgColors);
-  // setTimeout(function() {
-  //   new Chart(document.getElementById("myChart"), {
-  //       type: 'doughnut',
-  //       data: {
-  //         labels: chartLabels,
-  //         datasets: [
-  //           {
-  //             label: "age",
-  //             backgroundColor: chartBgColors,
-  //             data: chartData
-  //           }
-  //         ]
-  //       },
-  //       options: {
-  //         title: {
-  //           display: true,
-  //           text: 'Average age of occupations',
-  //           fontSize: 30,
-  //           fontFamily: "comfortaa"
-  //         }
-  //       }
-  //   }); //end of new chart
-  // }, 3000); //end of timeout and chart specific
+  setTimeout(function() {
+    new Chart(document.getElementById("myChart"), {
+        type: 'bar',
+        data: {
+          labels: chartLabels,
+          datasets: [
+            {
+              label: "Average Male Salary",
+              backgroundColor: chartBgColorsDark,
+              data: chartDataMale
+            },
+            {
+              label: "Average Female Salary",
+              backgroundColor: chartBgColorsLight,
+              data: chartDataFemale
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'AVERAGE SALARY BY GENDER',
+            fontSize: 20,
+            fontFamily: 'comfortaa'
+          }
+        }
+    }); //end of new chart
+  }, 3000); //end of timeout and chart specific
 };
 
 exports.genderChartWorkforce = function(occupations) {
-  $('#chart-container').empty();
-  $('#chart-container').append('<canvas id="myChart"><canvas>');
+  $('#chart-container').append('<canvas id="myChartTwo"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
     $.getJSON("https://api.datausa.io/api/?sort=desc&soc=" + occupations[i] + "&soc_level=3&show=sex&required=sex%2Cnum_ppl%2Cnum_ppl_moe&sumlevel=all&year=2015", function(data) {
       let males = data.data[0][3];
       let females = data.data[1][3];
-      console.log(occupations[i], "Males#: ", males, " Females#: ", females);
+      chartDataMale.push(males);
+      chartDataFemale.push(females);
     });
   }
+  //chart.js specific
+  Chart.defaults.global.defaultFontColor = '#f1f1f1';
+  Chart.defaults.global.defaultFontFamily = 'open sans';
+
+  let chartLabels = this.newArrayWithTitleFromCodes(occupations);
+  let chartDataMale = [];
+  let chartDataFemale = [];
+  let chartBgColorsLight = getChartBgColorLight(occupations);
+  let chartBgColorsDark = getChartBgColorDark(occupations);
+
+  setTimeout(function() {
+    new Chart(document.getElementById("myChartTwo"), {
+        type: 'bar',
+        data: {
+          labels: chartLabels,
+          datasets: [
+            {
+              label: "Number of Males",
+              backgroundColor: chartBgColorsDark,
+              data: chartDataMale
+            },
+            {
+              label: "Number of Females",
+              backgroundColor: chartBgColorsLight,
+              data: chartDataFemale
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'NUMBER OF PEOPLE IN WORKFORCE BY GENDER',
+            fontSize: 20,
+            fontFamily: 'comfortaa'
+          }
+        }
+    }); //end of new chart
+  }, 3000); //end of timeout and chart specific
 };
 
 
@@ -141,13 +186,57 @@ exports.ethnicityChart = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
-    $.getJSON("https://api.datausa.io/api/?sort=desc&soc=" + occupations[i] + "&soc_level=3&show=age%2Csex&required=age%2Cnum_ppl%2Cnum_ppl_moe&sumlevel=all%2Call&year=2015", function(data) {
+    $.getJSON("https://api.datausa.io/api/?sort=desc&sumlevel=all&soc=" + occupations[i] + "&required=num_ppl%2Cnum_ppl_moe&soc_level=3&show=race&year=2015", function(data) {
+      let white = 0, black = 0, amIndian = 0, alaskaNative = 0, otherNative = 0, asian = 0, hawaiian = 0, other = 0, twoPlus = 0;
 
-    });
-  }
+      for (let i = 0; i < data.data.length; i++) {
+        if (data.data[i][2] === "1") { white += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "2") { black += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "3") { amIndian += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "4") { alaskaNative += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "5") { otherNative += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "6") { asian += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "7") { hawaiian += parseInt(data.data[i][3]); }
+        else if (data.data[i][2] === "8") { other += parseInt(data.data[i][3]); }
+        else { twoPlus += parseInt(data.data[i][3]); }
+      }
+      chartData.push([white, black, amIndian, alaskaNative, otherNative, asian, hawaiian, other, twoPlus]);
+    });//end api call
+  }// end occupations loop
+
+  //chart.js specific
+  Chart.defaults.global.defaultFontColor = '#000';
+  Chart.defaults.global.defaultFontFamily = 'open sans';
+
+  let chartLabels = this.newArrayWithTitleFromCodes(occupations);
+  // let chartLabels = ['White', 'Black', 'Asian', 'Other', 'Two+', 'American Indian', 'Hawaiian', 'Other Native', 'Alaska Native'];
+  let chartData = [];
+  let chartBgColorsDark = getChartBgColorDark(chartLabels);
+
+  setTimeout(function() {
+    new Chart(document.getElementById("myChart"), {
+      type: 'doughnut',
+      data: {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: "Computer Support Specialists",
+            backgroundColor: chartBgColorsDark,
+            data: chartData[0]
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'NUMBER OF PEOPLE IN WORKFORCE BY GENDER',
+          fontSize: 20,
+          fontFamily: 'comfortaa'
+        }
+      }
+    }); //end of new chart
+  }, 3000); //end of timeout and chart specific
 };
-
-
 
 
 
@@ -186,7 +275,7 @@ function getChartBgColorLight(occupations) {
 }
 function getChartBgColorDark(occupations) {
     let output = [];
-    let colors = ['#B8583A', '#AB9F2D', '#5C8EA6', '#8E63A9', '#7DB67B', '#316BB0', '#AE707E', '#BA994B', '#5B9785'];
+    let colors = ['#B8583A', '#AB9F2D', '#5C8EA6', '#8E63A9', '#7DB67B', '#316BB0', '#AE707E', '#BA994B', '#5B9785', '#8FC93A'];
     let counter = 0;
     for (var i = 0; i < occupations.length; i++) {
       output.push(colors[counter]);

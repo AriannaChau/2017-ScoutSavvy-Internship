@@ -55,16 +55,16 @@ $(function() {
       $('#chart-container').prepend('<h4>Average age of occupations</h4>');
       showChart();
     } else if (selectedChart === "gender"){
-      data.genderChartWorkforce(selectedOccupations);
+      $('#selectedChart').text('gender');
       data.genderChartSalary(selectedOccupations);
+      data.genderChartWorkforce(selectedOccupations);
       showChart();
     } else if (selectedChart === "ethnicity"){
-      // data.ethnicityChart(selectedOccupations);
-      // data.newArrayWithTitleFromCodes(selectedOccupations);
-      // showChart();
+      $('#selectedChart').text('ethnicity');
+      data.ethnicityChart(selectedOccupations);
+      showChart();
     }
   });
-
 
   function showChart() {
     $('#city').val('');
