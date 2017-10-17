@@ -18,6 +18,7 @@ exports.ageChart = function(occupations) {
           numOfFemales++;
         }
       }
+
       avgMale /= numOfMales;
       avgFemale /= numOfFemales;
       avgMale = Math.round(avgMale * 100)/100;
@@ -184,58 +185,60 @@ exports.genderChartWorkforce = function(occupations) {
 
 exports.ethnicityChart = function(occupations) {
   $('#chart-container').empty();
-  $('#chart-container').append('<canvas id="myChart"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
+    $('#chart-container').append('<canvas id="myChart' + i + '"><canvas>');
     $.getJSON("https://api.datausa.io/api/?sort=desc&sumlevel=all&soc=" + occupations[i] + "&required=num_ppl%2Cnum_ppl_moe&soc_level=3&show=race&year=2015", function(data) {
+      console.log(data);
       let white = 0, black = 0, amIndian = 0, alaskaNative = 0, otherNative = 0, asian = 0, hawaiian = 0, other = 0, twoPlus = 0;
 
-      for (let i = 0; i < data.data.length; i++) {
-        if (data.data[i][2] === "1") { white += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "2") { black += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "3") { amIndian += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "4") { alaskaNative += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "5") { otherNative += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "6") { asian += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "7") { hawaiian += parseInt(data.data[i][3]); }
-        else if (data.data[i][2] === "8") { other += parseInt(data.data[i][3]); }
-        else { twoPlus += parseInt(data.data[i][3]); }
+      for (let j = 0; j < data.data.length; j++) {
+        if (data.data[j][2] === "1") { white += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "2") { black += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "3") { amIndian += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "4") { alaskaNative += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "5") { otherNative += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "6") { asian += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "7") { hawaiian += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "8") { other += parseInt(data.data[j][3]); }
+        else if (data.data[j][2] === "9") { twoPlus += parseInt(data.data[j][3]); }
       }
-      chartData.push([white, black, amIndian, alaskaNative, otherNative, asian, hawaiian, other, twoPlus]);
+
+      chartData.push(white, black, amIndian, alaskaNative, otherNative, asian, hawaiian, other, twoPlus);
     });//end api call
+    //chart.js specific
+    Chart.defaults.global.defaultFontColor = '#f1f1f1';
+    Chart.defaults.global.defaultFontFamily = 'open sans';
+
+    let chartData = [];
+    // let chartLabels = this.newArrayWithTitleFromCodes(occupations);
+    let chartLabels = ['White', 'Black', 'American Indian', 'Alaska Native', 'Other Native', 'Asian', 'Hawaiian', 'Other', 'Two+'];
+    let chartBgColorsDark = getChartBgColorDark(chartLabels);
+    let targetChart = "myChart" + i;
+    setTimeout(function() {
+      new Chart(document.getElementById(targetChart), {
+        type: 'doughnut',
+        data: {
+          labels: chartLabels,
+          datasets: [
+            {
+              label: "Computer Support Specialists",
+              backgroundColor: chartBgColorsDark,
+              data: chartData
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'NUMBER OF PEOPLE IN WORKFORCE BY GENDER',
+            fontSize: 20,
+            fontFamily: 'comfortaa'
+          }
+        }
+      }); //end of new chart
+    }, 3000); //end of timeout and chart specific
   }// end occupations loop
 
-  //chart.js specific
-  Chart.defaults.global.defaultFontColor = '#000';
-  Chart.defaults.global.defaultFontFamily = 'open sans';
-
-  let chartLabels = this.newArrayWithTitleFromCodes(occupations);
-  // let chartLabels = ['White', 'Black', 'Asian', 'Other', 'Two+', 'American Indian', 'Hawaiian', 'Other Native', 'Alaska Native'];
-  let chartData = [];
-  let chartBgColorsDark = getChartBgColorDark(chartLabels);
-
-  setTimeout(function() {
-    new Chart(document.getElementById("myChart"), {
-      type: 'doughnut',
-      data: {
-        labels: chartLabels,
-        datasets: [
-          {
-            label: "Computer Support Specialists",
-            backgroundColor: chartBgColorsDark,
-            data: chartData[0]
-          }
-        ]
-      },
-      options: {
-        title: {
-          display: true,
-          text: 'NUMBER OF PEOPLE IN WORKFORCE BY GENDER',
-          fontSize: 20,
-          fontFamily: 'comfortaa'
-        }
-      }
-    }); //end of new chart
-  }, 3000); //end of timeout and chart specific
 };
 
 
