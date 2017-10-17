@@ -83,10 +83,21 @@ $(function() {
     }
   });
 
-  //animation and reset fields when showing chart
+  //transition to about-section
+  $('.about-link').click(function() {
+    $('section').hide();
+    $('#about-section').show();
+  });
+
+  //transition to resources-section
+  $('.resources-link').click(function() {
+    $('section').hide();
+    $('#resources-section').show();
+  });
+
+  //transition to explore-section
   function showChart() {
-    $('#city').val('');
-    $('#explore').fadeOut(2000);
+    $('section').fadeOut(2000);
     setTimeout(function(){
       $('#chart-section').fadeIn(2000);
     }, 2500);
