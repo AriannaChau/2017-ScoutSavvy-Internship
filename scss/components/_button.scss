@@ -7,13 +7,13 @@ button {
   width: 293px;
   height: 72px;
   &:hover {
-    transition: all .3s ease-in-out;
+    transition: box-shadow .3s ease-in-out;
     cursor: pointer;
     box-shadow: 10px 10px 20px fade-out(black, .7), inset 1px 1px 5px fade-out(white, .5);
     background-color: $color-links;
   }
   &:active {
-    background-color: darken($color-accent2, 10%);
+    background-color: $color-accent2;
   }
 }
 

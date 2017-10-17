@@ -9,14 +9,12 @@
     h4 {
       margin-top: 36px;
     }
-    .placeholder {
-      border-radius: 50%;
-      height: 306px;
-      border: 2px solid $color-links;
-      transition: background-color .4s;
+    &:hover {
       cursor: pointer;
-      &:hover {
-        background-color: $color-accent2;
+      color: $color-links;
+      > img {
+        -webkit-filter: drop-shadow(5px 5px 5px #222);
+        filter: drop-shadow(5px 5px 5px #222);
       }
     }
   }
