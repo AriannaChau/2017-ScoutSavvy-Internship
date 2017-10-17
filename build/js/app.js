@@ -189,7 +189,6 @@ exports.ethnicityChart = function(occupations) {
   for (let i = 0; i < occupations.length; i++) {
     $('#chart-container').append('<canvas id="myChart' + i + '"><canvas>');
     $.getJSON("https://api.datausa.io/api/?sort=desc&sumlevel=all&soc=" + occupations[i] + "&required=num_ppl%2Cnum_ppl_moe&soc_level=3&show=race&year=2015", function(data) {
-      console.log(data);
       let white = 0, black = 0, amIndian = 0, alaskaNative = 0, otherNative = 0, asian = 0, hawaiian = 0, other = 0, twoPlus = 0;
 
       for (let j = 0; j < data.data.length; j++) {
@@ -293,6 +292,11 @@ var data = require('./../js/backend.js');
 
 
 $(function() {
+  //temp
+  $('.locationReload').click(function() {
+    location.reload();
+  });
+
   let selectedOccupations, selectedChart, selectedCity;
 
   //check checkboxes when box is clicked
@@ -314,6 +318,7 @@ $(function() {
     }).get();
   });
 
+  //select charts
   $('#age').click(function() {
     selectedChart = "age";
     $(this).parent().siblings().css('color', 'white');
@@ -332,31 +337,43 @@ $(function() {
     $(this).parent().css('color', '#EADA3D');
   });
 
+  //append charts
   $('.go').click(function() {
+
     selectedCity = $('#city').val();
+
     if (selectedCity === '') {
       alert('Please enter a city');
     } else if (selectedOccupations === undefined) {
       alert('Please select at least one occupation.');
     } else if (selectedChart === undefined) {
       alert('Please select Age, Gender, or Ethnicity.');
+
     } else if (selectedChart === "age"){
       data.ageChart(selectedOccupations);
       $('#selectedChart').text('age');
       $('#chart-container').prepend('<h4>Average age of occupations</h4>');
       showChart();
+
     } else if (selectedChart === "gender"){
       $('#selectedChart').text('gender');
       data.genderChartSalary(selectedOccupations);
       data.genderChartWorkforce(selectedOccupations);
       showChart();
+
     } else if (selectedChart === "ethnicity"){
+      $('#chartToggles').show();
       $('#selectedChart').text('ethnicity');
       data.ethnicityChart(selectedOccupations);
+      let occupationTitles = data.newArrayWithTitleFromCodes(selectedOccupations);
+      for (var i = 0; i < occupationTitles.length; i++) {
+        $('#chartToggles').append('<option value="myChart' + i + '">' + occupationTitles[i] + '</option>');
+      }
       showChart();
     }
   });
 
+  //animation and reset fields when showing chart
   function showChart() {
     $('#city').val('');
     $('#explore').fadeOut(2000);
@@ -366,6 +383,13 @@ $(function() {
     $('#selectedCity').text(selectedCity);
     $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
   }
+
+  //toggle ethnicity charts
+  $('#chartToggles').change(function() {
+    let selection = $('#chartToggles').val();
+    $('.chartjs-render-monitor').css({'visibility': 'hidden', 'position': 'absolute'});
+    $('#' + selection).css({'visibility': 'visible', 'position': 'relative'});
+  });
 
 });
 

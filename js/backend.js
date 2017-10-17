@@ -188,7 +188,6 @@ exports.ethnicityChart = function(occupations) {
   for (let i = 0; i < occupations.length; i++) {
     $('#chart-container').append('<canvas id="myChart' + i + '"><canvas>');
     $.getJSON("https://api.datausa.io/api/?sort=desc&sumlevel=all&soc=" + occupations[i] + "&required=num_ppl%2Cnum_ppl_moe&soc_level=3&show=race&year=2015", function(data) {
-      console.log(data);
       let white = 0, black = 0, amIndian = 0, alaskaNative = 0, otherNative = 0, asian = 0, hawaiian = 0, other = 0, twoPlus = 0;
 
       for (let j = 0; j < data.data.length; j++) {
