@@ -1,0 +1,29 @@
+#about-section {
+  margin: 78px;
+  display: none;
+  p {
+    margin-top: 16px;
+  }
+}
+
+.bios {
+  margin-top: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bio-control {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bio {
+  margin: 40px 10px;
+  width: 353px;
+  h4 {
+    margin-top: 36px;
+    text-align: center;
+  }
+}
