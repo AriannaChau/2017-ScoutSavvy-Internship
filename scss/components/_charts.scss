@@ -1,15 +1,16 @@
+
+
 #chart-section {
   display: none;
   margin: 54px 76px;
-}
-
-.search-summary {
   span {
     color: $color-accent1;
   }
 }
 
 #chart-container {
+  max-width: 1300px;
+  margin: 0 auto;
   h4 {
     font-size: 30px;
     text-align: center;

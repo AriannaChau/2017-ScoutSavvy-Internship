@@ -9,4 +9,7 @@
     line-height: 20px;
     font-family: 'open sans thin';
   }
+  @include respond-to ('x-small') {
+    margin: 0 20px 50px 20px
+  }
 }

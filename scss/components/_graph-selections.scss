@@ -3,9 +3,16 @@
   display: flex;
   width: 80vw;
   justify-content: space-between;
+  @include respond-to('medium') {
+    flex-direction: column;
+    align-items: center;
+  }
   .graph-selection {
     width: 306px;
     text-align: center;
+    img {
+      max-width: 100%;
+    }
     h4 {
       margin-top: 36px;
     }
@@ -17,5 +24,36 @@
         filter: drop-shadow(5px 5px 5px #222);
       }
     }
-  }
-}
+    @include respond-to('large') {
+      width: 250px;
+      margin: 0 10px;
+    }
+    @include respond-to('medium') {
+      width: 100%;
+      img {
+        width: 200px;
+      }
+      .descriptions {
+        float: left;
+        margin-top: 20px;
+        width: calc(100% - 220px);
+      }
+    }
+    @include respond-to('small') {
+      img {
+        display: none;
+      }
+      .descriptions {
+        float: none;
+        margin-top: 0px;
+        width: 100%;
+        h4 {
+          margin-top: 0;
+        }
+        p {
+          margin-bottom: 40px;
+        }
+      }
+    }//include small
+  }//graph-selection
+}//graph-selections

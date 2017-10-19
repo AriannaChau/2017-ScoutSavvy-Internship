@@ -1,0 +1,49 @@
+.meetup-information {
+  h4 {
+    margin-top: 30px;
+  }
+}
+
+.meetups {
+  a {
+    color: white;
+  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .meetup {
+    width: 300px;
+    height: 175px;
+    margin: 30px 15px 0 15px;
+    position: relative;
+    background-image: url('https://source.unsplash.com/user/inclusionlikes/likes/300x175');  //Photo by rawpixel.com on Unsplash
+    background-size: cover;
+    cursor: pointer;
+    &:hover {
+      opacity: .7;
+    }
+    .meetupTitle, .meetupAddress {
+      font-size: 16px;
+      position: absolute;
+      left: 12px;
+      bottom: 37px;
+      width: 276px;
+      line-height: 1em;
+      text-shadow: 1px 1px 1px black;
+    }
+    .meetupAddress {
+      font-size: 13px;
+      top: 140px;
+      bottom: auto;
+    }
+  }
+  #meetup1 {
+    background-image: url('https://source.unsplash.com/300x175/?business');  //Photo by rawpixel.com on Unsplash
+  }
+  #meetup2 {
+    background-image: url('https://source.unsplash.com/300x175/?meeting');  //Photo by rawpixel.com on Unsplash
+  }
+  #meetup3 {
+    background-image: url('https://source.unsplash.com/300x175/?people');  //Photo by rawpixel.com on Unsplash
+  }
+}

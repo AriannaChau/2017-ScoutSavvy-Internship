@@ -1,4 +1,28 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+exports.apiKey = "122c41335d25a6d2e625c1f4e196b52";
+
+},{}],2:[function(require,module,exports){
+
+
+//meetup callback
+// exports.findMeetups =
+//   $.ajax({
+//     type:"GET", // GET = requesting data
+//     url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
+//     success: function(data) {
+//       let output = [];
+//       for (var i = 0; i < 4; i++) {
+//         let address = data.data[i].venue.address_1 + " " + data.data[i].venue.city + ", " + data.data[i].venue.state;
+//         let meetup = [data.data[i].name, address, data.data[i].link];
+//         output.push(meetup);
+//         return output;
+//       }
+//     },
+//     // error: function()
+//     dataType: 'jsonp',
+//   });
+
+//charts
 exports.ageChart = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
@@ -256,16 +280,7 @@ exports.newArrayWithTitleFromCodes = function(occupations) {
   return newArray;
 };
 
-// function getChartBgColor(occupations) {
-//     let output = [];
-//     let colors = ['#FC784F', '#EADA3D', '#7EC2E3', '#C287E8', '#ABFAA9', '#4392F1', '#EF99AC', '#FFD166', '#7DCFB6'];
-//     let counter = 0;
-//     for (var i = 0; i < occupations.length; i++) {
-//       output.push(colors[counter]);
-//       counter++;
-//     }
-//     return output;
-// }
+//chart colors
 function getChartBgColorLight(occupations) {
     let output = [];
     let colors = ['#FC9C7F', '#EFE471', '#A1D2EA', '#D2A7EE', '#C1FBC0', '#76AFF4', '#F3B4C2', '#FFDD8F', '#A0DCC9'];
@@ -287,17 +302,32 @@ function getChartBgColorDark(occupations) {
     return output;
 }
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var data = require('./../js/backend.js');
+var selectedOccupations, selectedChart, selectedCity, autocomplete, zip;
 
+google.maps.event.addDomListener(window, 'load', initialize);
+// initialize city input auto complete
+function initialize() {
+  var input = document.getElementById('city');
+  autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.addListener('place_changed', fillInAddress);
+}
 
+function fillInAddress() {
+  var place = autocomplete.getPlace();
+  // selectedCity = place.address_components[0].long_name;
+  for (var i = 0; i < place.address_components.length; i++) {
+    for (var j = 0; j < place.address_components[i].types.length; j++) {
+      if (place.address_components[i].types[j] == "postal_code") {
+        zip = place.address_components[i].long_name;
+      }
+    }
+  }
+}
+
+//user interface logic
 $(function() {
-  //temp
-  $('.locationReload').click(function() {
-    location.reload();
-  });
-
-  let selectedOccupations, selectedChart, selectedCity;
 
   //check checkboxes when box is clicked
   $('.box-control').click(function() {
@@ -321,26 +351,28 @@ $(function() {
   //select charts
   $('#age').click(function() {
     selectedChart = "age";
-    $(this).parent().siblings().css('color', 'white');
-    $(this).parent().css('color', '#EADA3D');
+    $(this).siblings().css('color', 'white');
+    $(this).css('color', '#EADA3D');
   });
 
   $('#gender').click(function() {
     selectedChart = "gender";
-    $(this).parent().siblings().css('color', 'white');
-    $(this).parent().css('color', '#EADA3D');
+    $(this).siblings().css('color', 'white');
+    $(this).css('color', '#EADA3D');
   });
 
   $('#ethnicity').click(function() {
     selectedChart = "ethnicity";
-    $(this).parent().siblings().css('color', 'white');
-    $(this).parent().css('color', '#EADA3D');
+    $(this).siblings().css('color', 'white');
+    $(this).css('color', '#EADA3D');
+  });
+
+  $('.locationReload').click(function() {
+    location.reload();
   });
 
   //append charts
   $('.go').click(function() {
-
-    selectedCity = $('#city').val();
 
     if (selectedCity === '') {
       alert('Please enter a city');
@@ -391,8 +423,30 @@ $(function() {
     setTimeout(function(){
       $('#chart-section').fadeIn(2000);
     }, 2500);
-    $('#selectedCity').text(selectedCity);
+    $('.selectedCity').text(selectedCity);
     $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
+    //meetup specific
+    var apiKey = require('./../.env').apiKey;
+    $.ajax({
+      type:"GET", // GET = requesting data
+      url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
+      success: function(data) {
+        let output = [];
+        for (var i = 0; i < 4; i++) {
+          let address = data.data[i].venue.address_1 + " " + data.data[i].venue.city + ", " + data.data[i].venue.state;
+          $('.meetups').append(`
+            <a href="${data.data[i].link}">
+              <div id="meetup${[i]}" class="meetup">
+                <h4 class="meetupTitle">${data.data[i].name}</h4>
+                <p class="meetupAddress">${address}</p>
+              </div>
+            </a>
+          `);
+        }
+      },
+      // error: function()
+      dataType: 'jsonp',
+    });//end ajax
   }
 
   //toggle ethnicity charts
@@ -402,6 +456,26 @@ $(function() {
     $('#' + selection).css({'visibility': 'visible', 'position': 'relative'});
   });
 
+
+  // Bias the autocomplete object to the user's geographical location,
+  // as supplied by the browser's 'navigator.geolocation' object.
+  $('#city').change(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  });
+
+
 });
 
-},{"./../js/backend.js":1}]},{},[2]);
+},{"./../.env":1,"./../js/backend.js":2}]},{},[3]);

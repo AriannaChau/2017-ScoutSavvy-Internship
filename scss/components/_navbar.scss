@@ -6,6 +6,9 @@
   img {
     width: 177px;
     margin-left: 15px;
+    @include respond-to('x-small') {
+      width: 140px;
+    }
   }
   nav {
     width: 365px;

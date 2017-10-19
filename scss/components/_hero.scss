@@ -1,13 +1,20 @@
 .hero-bg {
   background-image: url('/assets/images/hero-img.jpg');
   background-position: bottom;
-  background-size: 100%;
+  background-size: cover;
   height: 613px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 3px 8px fade-out(black, .5);
   margin-bottom: 77px;
+  @include respond-to('hero-img') {
+    background-size: auto 100%;
+  }
+  @include respond-to('medium') {
+    height: 400px;
+    background-size: cover;
+  }
   .hero {
     height: 400px;
     width: 775px;

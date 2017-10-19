@@ -20,4 +20,15 @@ button {
 .go {
   margin: 73px auto;
   display: block;
+  @include respond-to ('small') {
+    margin-top: 33px;
+  }
+}
+
+.backToSearch {
+  margin: 54px auto 0 auto;
+  display: block;
+  @include respond-to ('small') {
+    margin-top: 33px;
+  }
 }

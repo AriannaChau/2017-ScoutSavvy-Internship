@@ -1,3 +1,24 @@
+
+
+//meetup callback
+// exports.findMeetups =
+//   $.ajax({
+//     type:"GET", // GET = requesting data
+//     url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
+//     success: function(data) {
+//       let output = [];
+//       for (var i = 0; i < 4; i++) {
+//         let address = data.data[i].venue.address_1 + " " + data.data[i].venue.city + ", " + data.data[i].venue.state;
+//         let meetup = [data.data[i].name, address, data.data[i].link];
+//         output.push(meetup);
+//         return output;
+//       }
+//     },
+//     // error: function()
+//     dataType: 'jsonp',
+//   });
+
+//charts
 exports.ageChart = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
@@ -255,16 +276,7 @@ exports.newArrayWithTitleFromCodes = function(occupations) {
   return newArray;
 };
 
-// function getChartBgColor(occupations) {
-//     let output = [];
-//     let colors = ['#FC784F', '#EADA3D', '#7EC2E3', '#C287E8', '#ABFAA9', '#4392F1', '#EF99AC', '#FFD166', '#7DCFB6'];
-//     let counter = 0;
-//     for (var i = 0; i < occupations.length; i++) {
-//       output.push(colors[counter]);
-//       counter++;
-//     }
-//     return output;
-// }
+//chart colors
 function getChartBgColorLight(occupations) {
     let output = [];
     let colors = ['#FC9C7F', '#EFE471', '#A1D2EA', '#D2A7EE', '#C1FBC0', '#76AFF4', '#F3B4C2', '#FFDD8F', '#A0DCC9'];
