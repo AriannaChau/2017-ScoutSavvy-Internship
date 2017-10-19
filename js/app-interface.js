@@ -1,25 +1,5 @@
 var data = require('./../js/backend.js');
-var selectedOccupations, selectedChart, selectedCity, autocomplete, zip;
-
-google.maps.event.addDomListener(window, 'load', initialize);
-// initialize city input auto complete
-function initialize() {
-  var input = document.getElementById('city');
-  autocomplete = new google.maps.places.Autocomplete(input);
-  autocomplete.addListener('place_changed', fillInAddress);
-}
-
-function fillInAddress() {
-  var place = autocomplete.getPlace();
-  // selectedCity = place.address_components[0].long_name;
-  for (var i = 0; i < place.address_components.length; i++) {
-    for (var j = 0; j < place.address_components[i].types.length; j++) {
-      if (place.address_components[i].types[j] == "postal_code") {
-        zip = place.address_components[i].long_name;
-      }
-    }
-  }
-}
+var selectedOccupations, selectedChart;
 
 //user interface logic
 $(function() {
@@ -68,10 +48,10 @@ $(function() {
 
   //append charts
   $('.go').click(function() {
-
-    if (selectedCity === '') {
-      alert('Please enter a city');
-    } else if (selectedOccupations === undefined) {
+    // if (selectedCity === '') {
+    //   alert('Please enter a city');
+    // } else
+    if (selectedOccupations === undefined) {
       alert('Please select at least one occupation.');
     } else if (selectedChart === undefined) {
       alert('Please select Age, Gender, or Ethnicity.');
@@ -118,7 +98,7 @@ $(function() {
     setTimeout(function(){
       $('#chart-section').fadeIn(2000);
     }, 2500);
-    $('.selectedCity').text(selectedCity);
+    // $('.selectedCity').text(selectedCity);
     $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
     //meetup specific
     var apiKey = require('./../.env').apiKey;
@@ -151,24 +131,43 @@ $(function() {
     $('#' + selection).css({'visibility': 'visible', 'position': 'relative'});
   });
 
-
-  // Bias the autocomplete object to the user's geographical location,
-  // as supplied by the browser's 'navigator.geolocation' object.
-  $('#city').change(function() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
-  });
-
-
 });
+
+// var selectedCity, autocomplete, zip;
+// google.maps.event.addDomListener(window, 'load', initialize);
+// // initialize city input auto complete
+// function initialize() {
+//   var input = document.getElementById('city');
+//   autocomplete = new google.maps.places.Autocomplete(input);
+//   autocomplete.addListener('place_changed', fillInAddress);
+// }
+//
+// function fillInAddress() {
+//   var place = autocomplete.getPlace();
+//   // selectedCity = place.address_components[0].long_name;
+//   for (var i = 0; i < place.address_components.length; i++) {
+//     for (var j = 0; j < place.address_components[i].types.length; j++) {
+//       if (place.address_components[i].types[j] == "postal_code") {
+//         zip = place.address_components[i].long_name;
+//       }
+//     }
+//   }
+// }
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+// $('#city').change(function() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var geolocation = {
+//         lat: position.coords.latitude,
+//         lng: position.coords.longitude
+//       };
+//       var circle = new google.maps.Circle({
+//         center: geolocation,
+//         radius: position.coords.accuracy
+//       });
+//       autocomplete.setBounds(circle.getBounds());
+//     });
+//   }
+// });

@@ -24,11 +24,11 @@ html
         h3 What We Do
         p Here at Inclusion, we are dedicated to sharing useful knowledge about how women and minority groups are underrepresented in the tech industry.  Using various API’s and other tools available, we want to try and start a conversation based on facts about equality in the tech workforce. We have developed a handy guide to help you learn more about where you stand in the industry, and to supply you with a way to connect with others like you. Breaking into the the tech industry can be extremely difficult, let alone if you are a woman or a minority. We believe the more facts you have available to you about certain inequalities you might be up against, the better equipped you will be to fight them and make your place in the tech world. Knowledge is power, and we are dedicated to using this knowledge to help make sure everyone feels included. 
         h3 Lets Get Started
+        //- .form-control
+        //-   h5 First, enter your city
+        //-   input#city(type="text" placeholder="Portland, OR")
         .form-control
-          h5 First, enter your city
-          input#city(type="text" placeholder="Portland, OR")
-        .form-control
-          h5 Next choose which jobs you are interested in
+          h5 Choose which jobs you are interested in
         //- occupations form group
         .checkboxes
           each val, index in [{'title': 'Computer support specialists', 'code': '151150'}, {'title': 'Computer programmers', 'code': '151131'}, {'title': 'Computer systems analysts', 'code': '151121'}, {'title': 'Database administrators', 'code': '151141'}, {'title': 'Computer hardware engineers', 'code': '172061'}, {'title': 'Computer network architects', 'code': '151143'}, {'title': 'Computer & information research scientists', 'code': '151111'}, {'title': 'Software developers, applications & systems software', 'code': '15113X'}, {'title': 'Computer control programmers and operators', 'code': '514010'} ]

@@ -2,27 +2,7 @@
 exports.apiKey = "122c41335d25a6d2e625c1f4e196b52";
 
 },{}],2:[function(require,module,exports){
-
-
-//meetup callback
-// exports.findMeetups =
-//   $.ajax({
-//     type:"GET", // GET = requesting data
-//     url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
-//     success: function(data) {
-//       let output = [];
-//       for (var i = 0; i < 4; i++) {
-//         let address = data.data[i].venue.address_1 + " " + data.data[i].venue.city + ", " + data.data[i].venue.state;
-//         let meetup = [data.data[i].name, address, data.data[i].link];
-//         output.push(meetup);
-//         return output;
-//       }
-//     },
-//     // error: function()
-//     dataType: 'jsonp',
-//   });
-
-//charts
+//AGE CHART
 exports.ageChart = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
@@ -99,10 +79,7 @@ exports.ageChart = function(occupations) {
   }, 3000); //end of timeout and chart specific
 };//end of function
 
-
-
-
-
+//GENDER CHART SALARY
 exports.genderChartSalary = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
@@ -155,6 +132,7 @@ exports.genderChartSalary = function(occupations) {
   }, 3000); //end of timeout and chart specific
 };
 
+//GENDER CHART WORKFORCE
 exports.genderChartWorkforce = function(occupations) {
   $('#chart-container').append('<canvas id="myChartTwo"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
@@ -206,8 +184,7 @@ exports.genderChartWorkforce = function(occupations) {
 };
 
 
-
-
+//ETHNICITY CHART
 exports.ethnicityChart = function(occupations) {
   $('#chart-container').empty();
   for (let i = 0; i < occupations.length; i++) {
@@ -265,8 +242,6 @@ exports.ethnicityChart = function(occupations) {
 
 };
 
-
-
 exports.newArrayWithTitleFromCodes = function(occupations) {
   let listOfOccupations = [{title: 'Computer support specialists', code: '151150'}, {title: 'Computer programmers', code: '151131'}, {title: 'Computer systems analysts', code: '151121'}, {title: 'Database administrators', code: '151141'}, {title: 'Computer hardware engineers', code: '172061'}, {title: 'Computer network architects', code: '151143'}, {title: 'Computer & information research scientists', code: '151111'}, {title: 'Software developers, applications & systems software', code: '15113X'}, {title: 'Computer control programmers and operators', code: '514010'}];
   let newArray = [];
@@ -304,27 +279,7 @@ function getChartBgColorDark(occupations) {
 
 },{}],3:[function(require,module,exports){
 var data = require('./../js/backend.js');
-var selectedOccupations, selectedChart, selectedCity, autocomplete, zip;
-
-google.maps.event.addDomListener(window, 'load', initialize);
-// initialize city input auto complete
-function initialize() {
-  var input = document.getElementById('city');
-  autocomplete = new google.maps.places.Autocomplete(input);
-  autocomplete.addListener('place_changed', fillInAddress);
-}
-
-function fillInAddress() {
-  var place = autocomplete.getPlace();
-  // selectedCity = place.address_components[0].long_name;
-  for (var i = 0; i < place.address_components.length; i++) {
-    for (var j = 0; j < place.address_components[i].types.length; j++) {
-      if (place.address_components[i].types[j] == "postal_code") {
-        zip = place.address_components[i].long_name;
-      }
-    }
-  }
-}
+var selectedOccupations, selectedChart;
 
 //user interface logic
 $(function() {
@@ -373,10 +328,10 @@ $(function() {
 
   //append charts
   $('.go').click(function() {
-
-    if (selectedCity === '') {
-      alert('Please enter a city');
-    } else if (selectedOccupations === undefined) {
+    // if (selectedCity === '') {
+    //   alert('Please enter a city');
+    // } else
+    if (selectedOccupations === undefined) {
       alert('Please select at least one occupation.');
     } else if (selectedChart === undefined) {
       alert('Please select Age, Gender, or Ethnicity.');
@@ -423,7 +378,7 @@ $(function() {
     setTimeout(function(){
       $('#chart-section').fadeIn(2000);
     }, 2500);
-    $('.selectedCity').text(selectedCity);
+    // $('.selectedCity').text(selectedCity);
     $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
     //meetup specific
     var apiKey = require('./../.env').apiKey;
@@ -456,26 +411,45 @@ $(function() {
     $('#' + selection).css({'visibility': 'visible', 'position': 'relative'});
   });
 
-
-  // Bias the autocomplete object to the user's geographical location,
-  // as supplied by the browser's 'navigator.geolocation' object.
-  $('#city').change(function() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
-  });
-
-
 });
+
+// var selectedCity, autocomplete, zip;
+// google.maps.event.addDomListener(window, 'load', initialize);
+// // initialize city input auto complete
+// function initialize() {
+//   var input = document.getElementById('city');
+//   autocomplete = new google.maps.places.Autocomplete(input);
+//   autocomplete.addListener('place_changed', fillInAddress);
+// }
+//
+// function fillInAddress() {
+//   var place = autocomplete.getPlace();
+//   // selectedCity = place.address_components[0].long_name;
+//   for (var i = 0; i < place.address_components.length; i++) {
+//     for (var j = 0; j < place.address_components[i].types.length; j++) {
+//       if (place.address_components[i].types[j] == "postal_code") {
+//         zip = place.address_components[i].long_name;
+//       }
+//     }
+//   }
+// }
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+// $('#city').change(function() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var geolocation = {
+//         lat: position.coords.latitude,
+//         lng: position.coords.longitude
+//       };
+//       var circle = new google.maps.Circle({
+//         center: geolocation,
+//         radius: position.coords.accuracy
+//       });
+//       autocomplete.setBounds(circle.getBounds());
+//     });
+//   }
+// });
 
 },{"./../.env":1,"./../js/backend.js":2}]},{},[3]);

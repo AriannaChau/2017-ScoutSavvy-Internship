@@ -1,24 +1,4 @@
-
-
-//meetup callback
-// exports.findMeetups =
-//   $.ajax({
-//     type:"GET", // GET = requesting data
-//     url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
-//     success: function(data) {
-//       let output = [];
-//       for (var i = 0; i < 4; i++) {
-//         let address = data.data[i].venue.address_1 + " " + data.data[i].venue.city + ", " + data.data[i].venue.state;
-//         let meetup = [data.data[i].name, address, data.data[i].link];
-//         output.push(meetup);
-//         return output;
-//       }
-//     },
-//     // error: function()
-//     dataType: 'jsonp',
-//   });
-
-//charts
+//AGE CHART
 exports.ageChart = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
@@ -95,10 +75,7 @@ exports.ageChart = function(occupations) {
   }, 3000); //end of timeout and chart specific
 };//end of function
 
-
-
-
-
+//GENDER CHART SALARY
 exports.genderChartSalary = function(occupations) {
   $('#chart-container').empty();
   $('#chart-container').append('<canvas id="myChart"><canvas>');
@@ -151,6 +128,7 @@ exports.genderChartSalary = function(occupations) {
   }, 3000); //end of timeout and chart specific
 };
 
+//GENDER CHART WORKFORCE
 exports.genderChartWorkforce = function(occupations) {
   $('#chart-container').append('<canvas id="myChartTwo"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
@@ -202,8 +180,7 @@ exports.genderChartWorkforce = function(occupations) {
 };
 
 
-
-
+//ETHNICITY CHART
 exports.ethnicityChart = function(occupations) {
   $('#chart-container').empty();
   for (let i = 0; i < occupations.length; i++) {
@@ -260,8 +237,6 @@ exports.ethnicityChart = function(occupations) {
   }// end occupations loop
 
 };
-
-
 
 exports.newArrayWithTitleFromCodes = function(occupations) {
   let listOfOccupations = [{title: 'Computer support specialists', code: '151150'}, {title: 'Computer programmers', code: '151131'}, {title: 'Computer systems analysts', code: '151121'}, {title: 'Database administrators', code: '151141'}, {title: 'Computer hardware engineers', code: '172061'}, {title: 'Computer network architects', code: '151143'}, {title: 'Computer & information research scientists', code: '151111'}, {title: 'Software developers, applications & systems software', code: '15113X'}, {title: 'Computer control programmers and operators', code: '514010'}];
