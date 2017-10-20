@@ -9,7 +9,7 @@
   },
   "author": "Daniel Lopez, Karina Roush, Arianna Chau, Maria Del Castillo",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "bower-files": "^4.0.0",
     "browser-sync": "^2.18.12",
