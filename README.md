@@ -2,9 +2,9 @@
   <br>
   Inclusion
   <br>
-  <img src="https://github.com/DLopez6877/drinken/blob/master/src/assets/images/screenshot1.png?raw=true alt="hardware" width="700">
+  <img src="https://github.com/DLopez6877/2017-ScoutSavvy-Internship/blob/master/src/assets/images/screenshot1.png?raw=true alt="screenshot" width="700">
   <br>
-  <img src="https://github.com/DLopez6877/drinken/blob/master/src/assets/images/screenshot2.png?raw=true alt="finsihed project" width="700">
+  <img src="https://github.com/DLopez6877/2017-ScoutSavvy-Internship/blob/master/src/assets/images/screenshot2.png?raw=true alt="screenshot project" width="700">
   <br>
 </h1>
 
