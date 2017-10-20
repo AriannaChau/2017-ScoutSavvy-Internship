@@ -1,7 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-exports.apiKey = "122c41335d25a6d2e625c1f4e196b52";
-
-},{}],2:[function(require,module,exports){
 //AGE CHART
 exports.ageChart = function(occupations) {
 
@@ -292,7 +289,7 @@ function getChartBgColorDark(occupations) {
     return output;
 }
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 var data = require('./../js/backend.js');
 var selectedOccupations, selectedChart;
 
@@ -398,7 +395,6 @@ $(function() {
     // $('.selectedCity').text(selectedCity);
     $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
     //meetup specific
-    var apiKey = require('./../.env').apiKey;
     $.ajax({
       type:"GET", // GET = requesting data
       url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
@@ -469,4 +465,4 @@ $(function() {
 //   }
 // });
 
-},{"./../.env":1,"./../js/backend.js":2}]},{},[3]);
+},{"./../js/backend.js":1}]},{},[2]);

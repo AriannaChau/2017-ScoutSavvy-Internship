@@ -103,7 +103,6 @@ $(function() {
     // $('.selectedCity').text(selectedCity);
     $('#occupations').text(data.newArrayWithTitleFromCodes(selectedOccupations).join("/ "));
     //meetup specific
-    var apiKey = require('./../.env').apiKey;
     $.ajax({
       type:"GET", // GET = requesting data
       url:"https://api.meetup.com/recommended/events?&sign=true&photo-host=public&page=4&fields=tech&key=" + apiKey,
