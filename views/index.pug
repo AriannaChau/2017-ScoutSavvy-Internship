@@ -4,7 +4,6 @@ html
     title Inclusion
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js")
     script(src="/js/jquery-3.2.1.min.js")
-    script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places")
     script(src="build/js/app.js")
     link(rel="stylesheet" type="text/css" href="build/css/styles.css")
   body
@@ -63,29 +62,41 @@ html
           .bio
             img(src="/assets/images/arianna.jpg")
             h4 Arianna Chau
+            h5 Designer
             p I'm a student at Epicodus studying to become a front end developer with a specific focus on CSS and design. I like to create, problem solve, and ask why. I’m all about growing, and lifting up those around me. And my dogs, I’m all about my dogs.
             p I love clean and minimalistic websites that achieve a level of depth. I tend to stick with gentle and neutral colors, but I also love challenging myself and thinking outside the box.
           .bio
             img(src="/assets/images/maria.jpg")
             h4 Maria Del Castillo
+            h5 Designer
             p I’m a current CSS/Design student at Epicodus after years of working in various trades, ranging from music composition and production to hospitality to user support for a nation-wide tech company.
             p My passion for front-end development is in UX/UI. Being a lifelong visual artist substantially informs my creative process in web design.
+            p <a href="https://rawgit.com/mfdi86/CSS-week-4-project/master/index.html">portfolio</a>
         .bio-control
           .bio
             img(src="/assets/images/daniel.jpg")
             h4 Daniel Lopez
+            h5 Developer
             p I am a front-end web developer and full-time geek. I spend most of my time inside my humble abode, in front of my computer, in Vancouver, WA. I have a strong passion for web devlopment and enjoy learning new technologies.
             p I'm excited to learn more about development and engineering in the future and hope to eventually work with big data, machine learning, ai, and other advanced concepts. As of right now, I am trying to improve my JavaScript skills by doing one project euler problem a day on my <a href="https://codepen.io/DLopez6877/">codepen</a>.
             p I'm a big soccer fan and enjoy playing Fifa on the Xbox or rocket league (soccer with cars). Favorite teams are Portland Timbers and Atlanta United. I recently picked up the hobby of simple robotics using arduino boards and enjoy watching movies / tv shows. 
             p My favorite show right now is between Rick and Morty and Stranger things but I also highly recommend Mindhunter on Netflix. Also super excited for Ready Player One to come out!
-            p Portfolio: <a href="www.daniel-j-lopez.com">www.daniel-j-lopez.com</a>
+            p <a href="http://www.daniel-j-lopez.com">portfolio</a>
           .bio
             img(src="/assets/images/karina.jpg")
             h4 Karina Roush
+            h5 Designer
             p I am currently a UX intern at ScoutSavvy working with a small team to utilize data and data visualization to tell a story about diversity in the tech industry. I am very close to graduating as a student at Epicodus, where I have been fine tuning my skills in front end web development and web design.
             p What really drew me to UX/UI was being able to mesh my artistic creativity with my expertise in customer service to create a positive experience for users to interact with. I love being able to create a website or app that can be extremely functional and serve a purpose, but is also beautiful, inspiring, and artistic.
             p When I am not playing with Sketch or InVision I am usually outside with friends taking pictures and enjoying the rainy Oregon weather, or inside with my cats and boyfriend watching Netflix.
             p I am actively looking for a long term career centered around UX/UI design in the Portland area. Let's design together!
+            p <a href="http://www.karinaroush.com">portfolio</a>
+        .bio
+          img(src="/assets/images/jonathan.jpg")
+          h4 Jonathan Ruffner
+          h5 Project Manager
+          p As a Certified Scrum Product Owner and Certified Scrum Master, Jonathan enjoys the challenge of discovering and translating the ideas and needs of clients into products and services that maximize the ROI for all stakeholders. His 6 years at Apple enabled him to gain valuable insights and familiarities with a broad span of clients, businesses, and industries across an array of different technology platforms. Specializing in Agile development methodologies, he applies his skills and experience in design, account management, and client discovery towards product development and building the right thing.
+          p <a href="https://jonathanruffner.com/">portfolio</a>
     section#resources-section
       h3 Resources
         p We used the <a>Meetup API</a> for our information. Below is the sources that the Meetup API gathers from, and a little information from <a>datausa</a> about each as well. 
@@ -106,8 +117,9 @@ html
       h3 O*Net
         p The O*Net Skills is a dataset containing detailed descriptions of the required and used skills for specific occupations. The O*Net dataset is sponsored by the United States Department of Labor. Data USA currently uses version 19.0 (July 2014) of the O*NET Database. 
     section#chart-section
-      h3.search-summary You searched for information relating to <span id="selectedChart"></span> in <span id="occupations"></span> in the city <span class="selectedCity"></span>. Here’s what we came up with:
-      select#chartToggles
+      .wrapper
+        h3.search-summary You searched for information relating to <span id="selectedChart"></span> in <span id="occupations"></span> in the city <span class="selectedCity"></span>. Here’s what we came up with:
+        select#chartToggles
       #chart-container
       .meetup-information
         h4 Here are some tech meetups you can visit this week in <span class="selectedCity"></span> View more at <a href="https://www.meetup.com/">Meetup.com</a>.

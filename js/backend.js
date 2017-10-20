@@ -1,6 +1,6 @@
 //AGE CHART
 exports.ageChart = function(occupations) {
-  $('#chart-container').empty();
+
   $('#chart-container').append('<canvas id="myChart"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
     $.getJSON("https://api.datausa.io/api/?sort=desc&soc=" + occupations[i] + "&soc_level=3&show=age%2Csex&required=age%2Cnum_ppl%2Cnum_ppl_moe&sumlevel=all%2Call&year=2015", function(data) {
@@ -63,13 +63,13 @@ exports.ageChart = function(occupations) {
           ]
         },
         options: {
-          title: {
-            display: true,
-            text: 'Age',
-            position: 'left',
-            fontSize: 20,
-            fontFamily: 'comfortaa'
-          }
+          scales: {
+            xAxes: [{
+              display: false
+            }]
+          },
+          responsive: true,
+          maintainAspectRatio: false
         }
     }); //end of new chart
   }, 3000); //end of timeout and chart specific
@@ -77,7 +77,7 @@ exports.ageChart = function(occupations) {
 
 //GENDER CHART SALARY
 exports.genderChartSalary = function(occupations) {
-  $('#chart-container').empty();
+
   $('#chart-container').append('<canvas id="myChart"><canvas>');
   for (let i = 0; i < occupations.length; i++) {
     $.getJSON("https://api.datausa.io/api/?sort=desc&show=soc%2Csex&required=num_ppl%2Cnum_ppl_moe%2Cavg_wage_ft%2Cavg_wage_ft_moe&sumlevel=3%2Call&year=2015&geo=01000US&soc=" + occupations[i], function(data) {
@@ -119,10 +119,17 @@ exports.genderChartSalary = function(occupations) {
         options: {
           title: {
             display: true,
-            text: 'AVERAGE SALARY BY GENDER',
+            text: 'AVERAGE SALARY',
             fontSize: 20,
             fontFamily: 'comfortaa'
-          }
+          },
+          scales: {
+            xAxes: [{
+              display: false
+            }]
+          },
+          responsive: true,
+          maintainAspectRatio: false
         }
     }); //end of new chart
   }, 3000); //end of timeout and chart specific
@@ -151,30 +158,37 @@ exports.genderChartWorkforce = function(occupations) {
 
   setTimeout(function() {
     new Chart(document.getElementById("myChartTwo"), {
-        type: 'bar',
-        data: {
-          labels: chartLabels,
-          datasets: [
-            {
-              label: "Number of Males",
-              backgroundColor: chartBgColorsDark,
-              data: chartDataMale
-            },
-            {
-              label: "Number of Females",
-              backgroundColor: chartBgColorsLight,
-              data: chartDataFemale
-            }
-          ]
-        },
-        options: {
-          title: {
-            display: true,
-            text: 'NUMBER OF PEOPLE IN WORKFORCE BY GENDER',
-            fontSize: 20,
-            fontFamily: 'comfortaa'
+      type: 'bar',
+      data: {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: "Number of Males",
+            backgroundColor: chartBgColorsDark,
+            data: chartDataMale
+          },
+          {
+            label: "Number of Females",
+            backgroundColor: chartBgColorsLight,
+            data: chartDataFemale
           }
-        }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: '# OF PEOPLE IN WORKFORCE',
+          fontSize: 20,
+          fontFamily: 'comfortaa'
+        },
+        scales: {
+          xAxes: [{
+            display: false
+          }]
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
     }); //end of new chart
   }, 3000); //end of timeout and chart specific
 };
@@ -182,7 +196,6 @@ exports.genderChartWorkforce = function(occupations) {
 
 //ETHNICITY CHART
 exports.ethnicityChart = function(occupations) {
-  $('#chart-container').empty();
   for (let i = 0; i < occupations.length; i++) {
     $('#chart-container').append('<canvas id="myChart' + i + '"><canvas>');
     $.getJSON("https://api.datausa.io/api/?sort=desc&sumlevel=all&soc=" + occupations[i] + "&required=num_ppl%2Cnum_ppl_moe&soc_level=3&show=race&year=2015", function(data) {
@@ -227,15 +240,17 @@ exports.ethnicityChart = function(occupations) {
         options: {
           title: {
             display: true,
-            text: 'NUMBER OF PEOPLE IN WORKFORCE BY GENDER',
+            text: '# OF PEOPLE IN WORKFORCE',
+            padding: 30,
             fontSize: 20,
             fontFamily: 'comfortaa'
-          }
+          },
+          responsive: true,
+          maintainAspectRatio: false
         }
       }); //end of new chart
     }, 3000); //end of timeout and chart specific
   }// end occupations loop
-
 };
 
 exports.newArrayWithTitleFromCodes = function(occupations) {

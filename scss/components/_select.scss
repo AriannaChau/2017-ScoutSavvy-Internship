@@ -1,0 +1,35 @@
+.wrapper {
+  position: relative;
+}
+
+select#chartToggles {
+  position: absolute;
+  bottom: -83px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  height: auto;
+  font-size: 20px;
+  color: $color-links;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  min-height: 25px;
+  &:focus {
+    outline: none;
+  }
+  option {
+    text-align: right;
+  }
+  @include respond-to ('x-small') {
+    width: 300px;
+  }
+  //remove default arrow and add custom arrow
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;       /* remove default arrow */
+  background-image: url('../../assets/images/select-arrows.png');   /* add custom arrow */
+  background-position: right;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}

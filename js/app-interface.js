@@ -67,6 +67,7 @@ $(function() {
       data.genderChartSalary(selectedOccupations);
       data.genderChartWorkforce(selectedOccupations);
       showChart();
+      $('#chart-container').after('<div id="spacer"></div>');
 
     } else if (selectedChart === "ethnicity"){
       $('#chartToggles').show();
@@ -77,6 +78,7 @@ $(function() {
         $('#chartToggles').append('<option value="myChart' + i + '">' + occupationTitles[i] + '</option>');
       }
       showChart();
+      $('#chart-container').addClass('ethnicity-chart');
     }
   });
 

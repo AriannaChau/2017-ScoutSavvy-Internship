@@ -1,16 +1,30 @@
-
-
 #chart-section {
   display: none;
   margin: 54px 76px;
   span {
     color: $color-accent1;
   }
+  @include respond-to ('medium') {
+    margin: 54px 20px;
+  }
+  .ethnicity-chart {
+    @include respond-to ('x-small') {
+      height: 500px;
+      margin-bottom: -60px;
+    }
+  }
 }
 
 #chart-container {
+  position: relative;
   max-width: 1300px;
-  margin: 0 auto;
+  margin: 0 auto 70px auto;
+  height: 600px;
+  @include respond-to ('x-small') {
+    margin-left: -20px;
+    margin-right: -20px;
+    height: 300px;
+  }
   h4 {
     font-size: 30px;
     text-align: center;
@@ -21,8 +35,28 @@
     position: absolute;
     top: 0;
   }
+  #myChartTwo {
+    visibility: visible;
+    position: relative;
+  }
+  canvas {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+
+#spacer {
+  margin-top: 680px;
+  @include respond-to ('x-small') {
+    margin-top: 380px;
+  }
 }
 
 #chartToggles {
   display: none;
+}
+
+.meetup-information {
+  margin-top: 130px;
 }
