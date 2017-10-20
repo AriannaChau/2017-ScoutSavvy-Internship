@@ -1,80 +1,52 @@
-<h1 align="center">Setup and Install</h1>
-
-To clone and run this application, you'll need [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-Clone this repository
-$ git clone https://github.com/DLopez6877/2017-ScoutSavvy-Internship
-
-Go into the repository
-$ cd 2017-ScoutSavvy-Internship
-
-Install dependencies
-$ npm install
-
-Run the app
-$ gulp serve
-```
-
-#### This project uses a Gulp pipe we are all familiar with but added 7-1 layout for Sass which we learned in class and <strong>[Pug](https://pugjs.org/language/attributes.html)</strong> which is really easy to learn and use. Index file is now located in the views folder and is listed as index.pug
-
 <h1 align="center">
-  BRANCHING
-  <br><br>
-  <img src="http://nvie.com/img/git-model@2x.png" width="700">
+  <br>
+  Inclusion
+  <br>
+  <img src="https://github.com/DLopez6877/drinken/blob/master/src/assets/images/screenshot1.png?raw=true alt="hardware" width="700">
+  <br>
+  <img src="https://github.com/DLopez6877/drinken/blob/master/src/assets/images/screenshot2.png?raw=true alt="finsihed project" width="700">
   <br>
 </h1>
 
+#### Here at Inclusion, we are dedicated to sharing useful knowledge about how women and minority groups are underrepresented in the tech industry.  Using various API’s and other tools available, we want to try and start a conversation based on facts about equality in the tech workforce. We have developed a handy guide to help you learn more about where you stand in the industry, and to supply you with a way to connect with others like you. Breaking into the the tech industry can be extremely difficult, let alone if you are a woman or a minority. We believe the more facts you have available to you about certain inequalities you might be up against, the better equipped you will be to fight them and make your place in the tech world. Knowledge is power, and we are dedicated to using this knowledge to help make sure everyone feels included.
 
-## Feature branches
+## Built Using the Following Technologies:
+* HTML
+* CSS
+* SASS
+* Meetup API
+* Charts.js
+* jQuery
+* JavaScript
 
-May branch off from: <br>
+## Authors
+* Daniel Lopez
+* Arianna Chau
+* Maria Del Castillo Infantas
+* Karina Roush
 
-* develop
+## Bugs
+* There are no known bugs at this time.
 
-Must merge back into:<br>
+## License
+MIT License
 
-* develop
+Copyright (c) 2017. Karina Roush, Daniel Lopez, Maria Del Castillo Infantas, and Arianna Chau.
 
-Branch naming convention:<br>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-* anything except master, develop, release-\*, or hotfix-\*
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## Creating a feature branch
-
-When starting work on a new feature, branch off from the develop branch.
-<br>
-
-```bash
-$ git checkout -b myfeature develop
-```
-
->Switched to a new branch "myfeature" <br>
-
-## Incorporating a finished feature on develop <br>
-Finished features may be merged into the develop branch to definitely add them to the upcoming release: <br>
-
-```bash
-$ git checkout develop
-```
-
->Switched to branch 'develop'
-
-```bash
-$ git merge --no-ff myfeature
-```
-
->Updating ea1b82a..05e9557<br>
->(Summary of changes)
-
-```bash
-$ git branch -d myfeature
-```
-
->Deleted branch myfeature (was 05e9557).
-
-```bash
-$ git push origin develop
-```
-
-<strong>More details about branching located [here](http://nvie.com/posts/a-successful-git-branching-model/)</strong>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
